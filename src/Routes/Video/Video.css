@@ -1,0 +1,33 @@
+
+.flex-container {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+}
+.my-video {
+  width: "50%";
+  height: "auto";
+  margin: auto;
+}
+.container {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+}
+
+.div-send-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-down {
+  z-index: 2;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: auto;
+}
