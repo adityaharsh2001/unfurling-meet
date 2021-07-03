@@ -1,12 +1,7 @@
 body {
   color: #fff;
 }
-div {
-  display: inline-block;
-  justify-content: center;
-
-}
-.container {
+.join {
   background: rgba(229, 213, 213, 0.1);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(5px);
@@ -14,7 +9,16 @@ div {
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
   width: 25%;
-  height: 50%;
+  
   position: absolute;
-  margin: auto;
+  top: 25%;
+  right: 5%;
+  display: block;
+}
+.text {
+  margin: 20%;
+  font-size: 30px;
+  font-family: sans-serif;
+  color: #fff;
+  font-weight: 900;
 }

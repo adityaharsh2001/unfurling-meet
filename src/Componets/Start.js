@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Input, Button } from "@material-ui/core";
 import "./Start.css";
+
 class Start extends Component {
   constructor(props) {
     super(props);
@@ -9,6 +10,7 @@ class Start extends Component {
     };
   }
 
+  // const classes = useStyles();
   handleChange = (e) => this.setState({ url: e.target.value });
   join = () => {
     if (this.state.url !== "") {
@@ -19,21 +21,27 @@ class Start extends Component {
       window.location.href = `/${url}`;
     }
   };
-
   render() {
     return (
-      <div className="container">
-        <p>
-          Start or join a meeting
-        </p>
-        <Input placeholder="URL" onChange={(e) => this.handleChange(e)} />
+      <div className="join">
+        <h1 className="text">Unfurling Meet</h1>
+        
+        <Input placeholder="Enter The meeting URL" onChange={(e) => this.handleChange(e)}  style={{ margin: "20px", color:"white"}}/>
         <Button
-          variant="contained"
-          color="primary"
+          variant="outlined"
+          color="secondary"
           onClick={this.join}
           style={{ margin: "20px" }}
         >
-          Go
+          Join
+        </Button>
+        <Button
+          variant="contained"
+          // color="primary"
+          onClick={this.join}
+          style={{ margin: "20px", width:"80%" }}
+        >
+          Create a Meeting
         </Button>
       </div>
     );
