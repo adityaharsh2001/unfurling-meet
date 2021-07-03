@@ -384,18 +384,16 @@ class Video extends Component {
               let video = document.createElement("video");
 
               let css = {
-                minWidth: "30%",
-                minHeight: "30%",
+                minWidth: "auto",
+                minHeight: "auto",
                 maxHeight: "100%",
                 margin: "10px",
-                borderStyle: "solid",
-                borderColor: "#bdbdbd",
                 objectFit: "fill",
               };
               for (let i in css) video.style[i] = css[i];
 
-              video.style.setProperty("width", "30%");
-              video.style.setProperty("height", "30%");
+              video.style.setProperty("width", "auto");
+              video.style.setProperty("height", "auto");
               video.setAttribute("data-socket", socketListId);
               video.srcObject = event.stream;
               video.autoplay = true;
