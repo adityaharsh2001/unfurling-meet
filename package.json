@@ -1,0 +1,64 @@
+{
+  "name": "unfurling-meet",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.1.4",
+    "bootstrap": "^4.4.1",
+    "color-convert": "^2.0.1",
+    "concurrently": "^5.1.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "nodemon": "^2.0.2",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
+    "react-color": "^2.19.3",
+    "react-css-grid": "^2.0.0-0",
+    "react-dom": "^16.13.1",
+    "react-flexbox-grid": "^2.1.2",
+    "react-grid-layout": "^0.18.3",
+    "react-grid-system": "^6.3.0",
+    "react-particles-js": "^3.5.3",
+    "react-router": "^5.1.2",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.4.1",
+    "react-tsparticles": "^1.30.2",
+    "reactstrap": "^8.4.1",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
+    "standard": "^14.3.3",
+    "xss": "^1.0.8"
+  },
+  "scripts": {
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app.js\" \"NODE_ENV=dev PORT=5000 react-scripts start\"",
+    "server": "NODE_ENV=production nodemon index.js",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "description": "Google Meet / Zoom clone in a few lines of code.",
+  "main": "app.js",
+  "author": "Aditya Harsh",
+  "license": "ISC"
+}
