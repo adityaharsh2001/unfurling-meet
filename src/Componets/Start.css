@@ -8,17 +8,16 @@ body {
   -webkit-backdrop-filter: blur(5px);
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.18);
-  width: 25%;
-  
+  width: 25vw;
   position: absolute;
   top: 25%;
   right: 5%;
   display: block;
 }
 .text {
+  color: #56cbcc;
   margin: 20%;
   font-size: 30px;
   font-family: sans-serif;
-  color: #fff;
   font-weight: 900;
 }

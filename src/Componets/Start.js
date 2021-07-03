@@ -24,14 +24,14 @@ class Start extends Component {
   render() {
     return (
       <div className="join">
-        <h1 className="text">Unfurling Meet</h1>
+        <p className="text" style={{color: "#56CBCC"}}>Unfurling Meet</p>
         
-        <Input placeholder="Enter The meeting URL" onChange={(e) => this.handleChange(e)}  style={{ margin: "20px", color:"white"}}/>
+        <Input placeholder="Enter The meeting URL" onChange={(e) => this.handleChange(e)}  style={{ margin: "20px", color:"white",borderColor:"#56CBCC"}}/>
         <Button
           variant="outlined"
-          color="secondary"
+          // color="primary"
           onClick={this.join}
-          style={{ margin: "20px" }}
+          style={{ margin: "20px", borderColor:"#56CBCC", color: "#56CBCC" }}
         >
           Join
         </Button>
@@ -39,7 +39,7 @@ class Start extends Component {
           variant="contained"
           // color="primary"
           onClick={this.join}
-          style={{ margin: "20px", width:"80%" }}
+          style={{ margin: "20px", width:"80%", backgroundColor:"#56CBCC" }}
         >
           Create a Meeting
         </Button>
