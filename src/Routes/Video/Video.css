@@ -1,3 +1,6 @@
+body{
+  color: #fff;
+}
 
 .flex-container {
   width: 50%;
@@ -5,10 +8,23 @@
   justify-content: center;
   margin: auto;
 }
-.my-video {
-  width: "50%";
-  height: "auto";
-  margin: auto;
+.my-video{
+  margin: 0 ;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: auto;
+}
+.disp-video {
+  margin: 0 ;
+  position: absolute;
+  bottom: 5%;
+  left: 5%;
+  -ms-transform: translate(-15%, -15%);
+  transform: translate(-15%, -15%);
+  height: 30%;
 }
 .container {
   align-items: center;

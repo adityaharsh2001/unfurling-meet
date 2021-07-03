@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Input, Button } from "@material-ui/core";
-import "./Start.css";
-
+import "../App.css"
 class Start extends Component {
   constructor(props) {
     super(props);
@@ -24,17 +23,7 @@ class Start extends Component {
   render() {
     return (
       <div className="join">
-        <p className="text" style={{color: "#56CBCC"}}>Unfurling Meet</p>
-        
-        <Input placeholder="Enter The meeting URL" onChange={(e) => this.handleChange(e)}  style={{ margin: "20px", color:"white",borderColor:"#56CBCC"}}/>
-        <Button
-          variant="outlined"
-          // color="primary"
-          onClick={this.join}
-          style={{ margin: "20px", borderColor:"#56CBCC", color: "#56CBCC" }}
-        >
-          Join
-        </Button>
+        <p className="text">Unfurling Meet</p>
         <Button
           variant="contained"
           // color="primary"
@@ -43,6 +32,16 @@ class Start extends Component {
         >
           Create a Meeting
         </Button>
+        <Input placeholder="Enter The meeting URL" onChange={(e) => this.handleChange(e)}  style={{ margin: "20px", color:"white",borderColor:"#56CBCC"}}/>
+        <Button className="btn"
+          variant="outlined"
+          // color="primary"
+          onClick={this.join}
+          style={{ margin: "20px", borderColor:"#56CBCC", color: "#56CBCC" }}
+        >
+          Join
+        </Button>
+        
       </div>
     );
   }

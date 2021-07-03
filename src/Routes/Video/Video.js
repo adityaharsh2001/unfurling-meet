@@ -15,6 +15,7 @@ import { Row } from "reactstrap";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Video.css";
+import "../../App.css"
 const server_url = "http://localhost:4001";
 var connections = {};
 const peerConnectionConfig = {
@@ -294,39 +295,39 @@ class Video extends Component {
     }
   };
 
-  changeCssVideos = (main) => {
-    let widthMain = main.offsetWidth;
-    let minWidth = "30%";
-    if ((widthMain * 30) / 100 < 300) {
-      minWidth = "300px";
-    }
-    let minHeight = "40%";
+  // changeCssVideos = (main) => {
+  //   let widthMain = main.offsetWidth;
+  //   let minWidth = "30%";
+  //   if ((widthMain * 30) / 100 < 300) {
+  //     minWidth = "300px";
+  //   }
+  //   let minHeight = "40%";
 
-    let height = String(100 / elms) + "%";
-    let width = "";
-    if (elms === 0 || elms === 1) {
-      width = "100%";
-      height = "100%";
-    } else if (elms === 2) {
-      width = "45%";
-      height = "100%";
-    } else if (elms === 3 || elms === 4) {
-      width = "35%";
-      height = "50%";
-    } else {
-      width = String(100 / elms) + "%";
-    }
+  //   let height = String(100 / elms) + "%";
+  //   let width = "";
+  //   if (elms === 0 || elms === 1) {
+  //     width = "100%";
+  //     height = "100%";
+  //   } else if (elms === 2) {
+  //     width = "45%";
+  //     height = "100%";
+  //   } else if (elms === 3 || elms === 4) {
+  //     width = "35%";
+  //     height = "50%";
+  //   } else {
+  //     width = String(100 / elms) + "%";
+  //   }
 
-    let videos = main.querySelectorAll("video");
-    for (let a = 0; a < videos.length; ++a) {
-      videos[a].style.minWidth = minWidth;
-      videos[a].style.minHeight = minHeight;
-      videos[a].style.setProperty("width", width);
-      videos[a].style.setProperty("height", height);
-    }
+  //   let videos = main.querySelectorAll("video");
+  //   for (let a = 0; a < videos.length; ++a) {
+  //     videos[a].style.minWidth = minWidth;
+  //     videos[a].style.minHeight = minHeight;
+  //     videos[a].style.setProperty("width", width);
+  //     videos[a].style.setProperty("height", height);
+  //   }
 
-    return { minWidth, minHeight, width, height };
-  };
+  //   return { minWidth, minHeight, width, height };
+  // };
 
   connectToSocketServer = () => {
     socket = io.connect(server_url, { secure: true });
@@ -345,8 +346,8 @@ class Video extends Component {
           elms--;
           video.parentNode.removeChild(video);
 
-          let main = document.getElementById("main");
-          this.changeCssVideos(main);
+          // let main = document.getElementById("main");
+          // this.changeCssVideos(main);
         }
       });
 
@@ -378,13 +379,13 @@ class Video extends Component {
             } else {
               elms = clients.length;
               let main = document.getElementById("main");
-              let cssMesure = this.changeCssVideos(main);
+              // let cssMesure = this.changeCssVideos(main);
 
               let video = document.createElement("video");
 
               let css = {
-                minWidth: cssMesure.minWidth,
-                minHeight: cssMesure.minHeight,
+                minWidth: "30%",
+                minHeight: "30%",
                 maxHeight: "100%",
                 margin: "10px",
                 borderStyle: "solid",
@@ -393,8 +394,8 @@ class Video extends Component {
               };
               for (let i in css) video.style[i] = css[i];
 
-              video.style.setProperty("width", cssMesure.width);
-              video.style.setProperty("height", cssMesure.height);
+              video.style.setProperty("width", "30%");
+              video.style.setProperty("height", "30%");
               video.setAttribute("data-socket", socketListId);
               video.srcObject = event.stream;
               video.autoplay = true;
@@ -526,49 +527,32 @@ class Video extends Component {
     return (
       <div>
         {this.state.askForUsername === true ? (
-          <div>
-            <div
-              style={{
-                background: "white",
-                width: "30%",
-                height: "auto",
-                padding: "20px",
-                minWidth: "400px",
-                textAlign: "center",
-                margin: "auto",
-                marginTop: "50px",
-                justifyContent: "center",
-              }}
+          <div style={{display:"flex", marginTop:"25vh"}}>
+            <div className="join"
             >
               <p
-                style={{ margin: 0, fontWeight: "bold", paddingRight: "50px" }}
+                className="text"
               >
-                Set your username
+                Join A Meet
               </p>
-              <Input
-                placeholder="Username"
+              <Input className="input"
+                placeholder="Enter a Username"
                 value={this.state.username}
                 onChange={(e) => this.handleUsername(e)}
               />
               <Button
                 variant="contained"
-                color="primary"
+                // color="primary"
                 onClick={this.connect}
-                style={{ margin: "20px" }}
+                style={{ margin: "20px", width:"80%", backgroundColor:"#56CBCC" }}
               >
                 Connect
               </Button>
             </div>
 
-            <div
-              style={{
-                justifyContent: "center",
-                textAlign: "center",
-                paddingTop: "40px",
-              }}
-            >
+            <div>
               <video
-                id="my-video"
+              className="my-video"
                 ref={this.localVideoref}
                 autoPlay
                 muted
@@ -579,11 +563,6 @@ class Video extends Component {
           <div>
             <div
               className="btn-down"
-              style={{
-                backgroundColor: "whitesmoke",
-                color: "whitesmoke",
-                textAlign: "center",
-              }}
             >
               <IconButton
                 style={{ color: "#424242" }}
@@ -675,6 +654,7 @@ class Video extends Component {
                   variant="contained"
                   color="primary"
                   onClick={this.sendMessage}
+                  style={{ margin: "20px", backgroundColor:"#56CBCC" }}
                 >
                   Send
                 </Button>
@@ -685,14 +665,7 @@ class Video extends Component {
               <div style={{ paddingTop: "20px" }}>
                 <Input value={window.location.href} disable="true" style={{ color: "#fff" }}></Input>
                 <Button
-                  style={{
-                    backgroundColor: "#3f51b5",
-                    color: "whitesmoke",
-                    marginLeft: "20px",
-                    marginTop: "10px",
-                    width: "120px",
-                    fontSize: "10px",
-                  }}
+                  style={{ margin: "20px", backgroundColor:"#56CBCC" }}
                   onClick={this.copyUrl}
                 >
                   Copy invite link
@@ -702,21 +675,13 @@ class Video extends Component {
               <Row
                 id="main"
                 className="flex-container"
-                style={{ margin: 0, padding: 0 }}
+                
               >
                 <video
-                  id="my-video"
+                  className="disp-video"
                   ref={this.localVideoref}
                   autoPlay
                   muted
-                  style={{
-                    borderStyle: "solid",
-                    borderColor: "#bdbdbd",
-                    margin: "10px",
-                    objectFit: "fill",
-                    width: "100%",
-                    height: "100%",
-                  }}
                 ></video>
               </Row>
             </div>
