@@ -348,6 +348,7 @@ class Video extends Component {
               let main = document.getElementById("main");
 
               let video = document.createElement("video");
+              // video.style.width= "300px";
               video.setAttribute("data-socket", socketListId);
               video.srcObject = event.stream;
               video.autoplay = true;
@@ -490,7 +491,6 @@ class Video extends Component {
               />
               <Button
                 variant="contained"
-                // color="primary"
                 onClick={this.connect}
                 style={{ margin: "20px", width:"80%", backgroundColor:"#56CBCC" }}
               >
@@ -626,7 +626,8 @@ class Video extends Component {
                   muted
                   ></video>
             </div>
-            <div id="main" className="flex-container"></div>
+            <div className="flex-container" id="main"/>
+            
           </div>
         )}
       </div>

@@ -6,6 +6,7 @@ body {
   width: 100%;
   background-repeat: no-repeat;
   overflow: hidden;
+  color: black;
 }
 .join {
   background: rgba(229, 213, 213, 0.1);
