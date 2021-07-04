@@ -36,7 +36,6 @@ class Video extends Component {
       video: false,
       audio: false,
       screen: false,
-      pinned: false,
       showModal: false,
       screenAvailable: false,
       messages: [],
@@ -466,17 +465,18 @@ class Video extends Component {
     );
   };
 
-  connect = () =>
+  connect = () => {
     this.setState({ askForUsername: false }, () => this.getMedia());
+    
+  }
 
   pin_video = () => {
     let pinvideo = document.querySelectorAll("video");
-    console.log(pinvideo);
+    // console.log(pinvideo);
     let pin_arr = Array.from(pinvideo);
     pin_arr.forEach(function (pinelem) {
       pinelem.addEventListener("click", function () {
-        pinelem.className = "pinned";
-
+          pinelem.classList.toggle('pinned');
       });
     });
   };
