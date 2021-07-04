@@ -511,7 +511,7 @@ class Video extends Component {
         ) : (
           <div>
             <div
-              className="btn-down" style={{ fontSize: "100px" }}
+              className="btn-down" 
             >
               <IconButton
                 style={{ color: "#fff" }}
