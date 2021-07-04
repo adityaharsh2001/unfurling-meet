@@ -34,3 +34,64 @@ Input {
   color: #fff !important;
   border-color: #56cbcc;
 }
+.flex-container {
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  max-width: 300px;
+  justify-content: space-between;
+  margin: 10px 20px auto auto;
+}
+
+video {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 30px;
+  background: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png);
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
+  /* height: 30%; */
+}
+.my-video {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  height: auto;
+}
+.disp-video {
+  display: flex;
+  margin: 0;
+  position: absolute;
+  bottom: 5%;
+  left: 8%;
+  -ms-transform: translate(-15%, -15%);
+  transform: translate(-15%, -15%);
+  background-image: url(https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/1024px-User-avatar.svg.png);
+  background-size: 30%;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 30%;
+}
+
+.div-send-msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.btn-down {
+  z-index: 2;
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  height: auto;
+}

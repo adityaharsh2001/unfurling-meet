@@ -13,7 +13,6 @@ import { message } from "antd";
 import "antd/dist/antd.css";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
-import "./Video.css";
 import "../../App.css"
 
 
@@ -347,13 +346,14 @@ class Video extends Component {
               elms = clients.length;
               let main = document.getElementById("main");
 
-              let video = document.createElement("video");
-              // video.style.width= "300px";
-              video.setAttribute("data-socket", socketListId);
-              video.srcObject = event.stream;
-              video.autoplay = true;
-              video.playsinline = true;
-              main.appendChild(video);
+              let videoelem = document.createElement("video");
+              videoelem.className = 'user-video';
+              
+              videoelem.setAttribute("data-socket", socketListId);
+              videoelem.srcObject = event.stream;
+              videoelem.autoplay = true;
+              videoelem.playsinline = true;
+              main.appendChild(videoelem);
             }
           };
           // Add the local video stream
@@ -488,6 +488,7 @@ class Video extends Component {
                 placeholder="Enter a Username"
                 value={this.state.username}
                 onChange={(e) => this.handleUsername(e)}
+                style={{color: "#000000" }}
               />
               <Button
                 variant="contained"
@@ -627,7 +628,6 @@ class Video extends Component {
                   ></video>
             </div>
             <div className="flex-container" id="main"/>
-            
           </div>
         )}
       </div>
