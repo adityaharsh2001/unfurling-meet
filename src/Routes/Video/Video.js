@@ -11,16 +11,23 @@ import CallEndIcon from "@material-ui/icons/CallEnd";
 import ChatIcon from "@material-ui/icons/Chat";
 import { message } from "antd";
 import "antd/dist/antd.css";
-import { Row } from "reactstrap";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Video.css";
 import "../../App.css"
+
+
+
 const server_url = "http://localhost:4001";
+
+
+
 var connections = {};
 const peerConnectionConfig = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
 };
+
+
 var socket = null;
 var socketId = null;
 var elms = 0;
@@ -295,40 +302,6 @@ class Video extends Component {
     }
   };
 
-  // changeCssVideos = (main) => {
-  //   let widthMain = main.offsetWidth;
-  //   let minWidth = "30%";
-  //   if ((widthMain * 30) / 100 < 300) {
-  //     minWidth = "300px";
-  //   }
-  //   let minHeight = "40%";
-
-  //   let height = String(100 / elms) + "%";
-  //   let width = "";
-  //   if (elms === 0 || elms === 1) {
-  //     width = "100%";
-  //     height = "100%";
-  //   } else if (elms === 2) {
-  //     width = "45%";
-  //     height = "100%";
-  //   } else if (elms === 3 || elms === 4) {
-  //     width = "35%";
-  //     height = "50%";
-  //   } else {
-  //     width = String(100 / elms) + "%";
-  //   }
-
-  //   let videos = main.querySelectorAll("video");
-  //   for (let a = 0; a < videos.length; ++a) {
-  //     videos[a].style.minWidth = minWidth;
-  //     videos[a].style.minHeight = minHeight;
-  //     videos[a].style.setProperty("width", width);
-  //     videos[a].style.setProperty("height", height);
-  //   }
-
-  //   return { minWidth, minHeight, width, height };
-  // };
-
   connectToSocketServer = () => {
     socket = io.connect(server_url, { secure: true });
 
@@ -346,8 +319,6 @@ class Video extends Component {
           elms--;
           video.parentNode.removeChild(video);
 
-          // let main = document.getElementById("main");
-          // this.changeCssVideos(main);
         }
       });
 
@@ -356,7 +327,7 @@ class Video extends Component {
           connections[socketListId] = new RTCPeerConnection(
             peerConnectionConfig
           );
-          // Wait for their ice candidate
+          
           connections[socketListId].onicecandidate = function (event) {
             if (event.candidate != null) {
               socket.emit(
@@ -366,43 +337,24 @@ class Video extends Component {
               );
             }
           };
-
-          // Wait for their video stream
           connections[socketListId].onaddstream = (event) => {
-            // TODO mute button, full screen button
-            var searchVidep = document.querySelector(
+            var searchVideo = document.querySelector(
               `[data-socket="${socketListId}"]`
             );
-            if (searchVidep !== null) {
-              // if i don't do this check it make an empyt square
-              searchVidep.srcObject = event.stream;
+            if (searchVideo !== null) {
+              searchVideo.srcObject = event.stream;
             } else {
               elms = clients.length;
               let main = document.getElementById("main");
-              // let cssMesure = this.changeCssVideos(main);
 
               let video = document.createElement("video");
-
-              let css = {
-                minWidth: "auto",
-                minHeight: "auto",
-                maxHeight: "100%",
-                margin: "10px",
-                objectFit: "fill",
-              };
-              for (let i in css) video.style[i] = css[i];
-
-              video.style.setProperty("width", "auto");
-              video.style.setProperty("height", "auto");
               video.setAttribute("data-socket", socketListId);
               video.srcObject = event.stream;
               video.autoplay = true;
               video.playsinline = true;
-
               main.appendChild(video);
             }
           };
-
           // Add the local video stream
           if (window.localStream !== undefined && window.localStream !== null) {
             connections[socketListId].addStream(window.localStream);
@@ -421,7 +373,6 @@ class Video extends Component {
             try {
               connections[id2].addStream(window.localStream);
             } catch (e) {}
-
             connections[id2].createOffer().then((description) => {
               connections[id2]
                 .setLocalDescription(description)
@@ -439,7 +390,6 @@ class Video extends Component {
       });
     });
   };
-
   silence = () => {
     let ctx = new AudioContext();
     let oscillator = ctx.createOscillator();
@@ -560,10 +510,10 @@ class Video extends Component {
         ) : (
           <div>
             <div
-              className="btn-down"
+              className="btn-down" style={{ fontSize: "100px" }}
             >
               <IconButton
-                style={{ color: "#424242" }}
+                style={{ color: "#fff" }}
                 onClick={this.handleVideo}
               >
                 {this.state.video === true ? (
@@ -581,7 +531,7 @@ class Video extends Component {
               </IconButton>
 
               <IconButton
-                style={{ color: "#424242" }}
+                style={{ color: "#fff" }}
                 onClick={this.handleAudio}
               >
                 {this.state.audio === true ? <MicIcon /> : <MicOffIcon />}
@@ -589,7 +539,7 @@ class Video extends Component {
 
               {this.state.screenAvailable === true ? (
                 <IconButton
-                  style={{ color: "#424242" }}
+                  style={{ color: "#fff" }}
                   onClick={this.handleScreen}
                 >
                   {this.state.screen === true ? (
@@ -607,7 +557,7 @@ class Video extends Component {
                 onClick={this.openChat}
               >
                 <IconButton
-                  style={{ color: "#424242" }}
+                  style={{ color: "#fff" }}
                   onClick={this.openChat}
                 >
                   <ChatIcon />
@@ -669,20 +619,14 @@ class Video extends Component {
                   Copy invite link
                 </Button>
               </div>
-
-              <Row
-                id="main"
-                className="flex-container"
-                
-              >
                 <video
                   className="disp-video"
                   ref={this.localVideoref}
                   autoPlay
                   muted
-                ></video>
-              </Row>
+                  ></video>
             </div>
+            <div id="main" className="flex-container"></div>
           </div>
         )}
       </div>
