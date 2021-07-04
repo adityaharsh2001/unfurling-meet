@@ -13,19 +13,14 @@ import { message } from "antd";
 import "antd/dist/antd.css";
 import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
-import "../../App.css"
-
-
+import "../../App.css";
 
 const server_url = "http://localhost:4001";
-
-
 
 var connections = {};
 const peerConnectionConfig = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
 };
-
 
 var socket = null;
 var socketId = null;
@@ -41,6 +36,7 @@ class Video extends Component {
       video: false,
       audio: false,
       screen: false,
+      pinned: false,
       showModal: false,
       screenAvailable: false,
       messages: [],
@@ -317,7 +313,7 @@ class Video extends Component {
         if (video !== null) {
           elms--;
           video.parentNode.removeChild(video);
-
+          this.pin_video();
         }
       });
 
@@ -326,7 +322,7 @@ class Video extends Component {
           connections[socketListId] = new RTCPeerConnection(
             peerConnectionConfig
           );
-          
+
           connections[socketListId].onicecandidate = function (event) {
             if (event.candidate != null) {
               socket.emit(
@@ -344,16 +340,16 @@ class Video extends Component {
               searchVideo.srcObject = event.stream;
             } else {
               elms = clients.length;
-              let main = document.getElementById("main");
-
-              let videoelem = document.createElement("video");
-              videoelem.className = 'user-video';
               
+              let main = document.getElementById("main");
+              let videoelem = document.createElement("video");
+              videoelem.className = "user-video";
               videoelem.setAttribute("data-socket", socketListId);
               videoelem.srcObject = event.stream;
               videoelem.autoplay = true;
               videoelem.playsinline = true;
               main.appendChild(videoelem);
+              this.pin_video();
             }
           };
           // Add the local video stream
@@ -366,7 +362,6 @@ class Video extends Component {
             connections[socketListId].addStream(window.localStream);
           }
         });
-
         if (id === socketId) {
           for (let id2 in connections) {
             if (id2 === socketId) continue;
@@ -470,30 +465,44 @@ class Video extends Component {
       }
     );
   };
+
   connect = () =>
     this.setState({ askForUsername: false }, () => this.getMedia());
+
+  pin_video = () => {
+    let pinvideo = document.querySelectorAll("video");
+    console.log(pinvideo);
+    let pin_arr = Array.from(pinvideo);
+    pin_arr.forEach(function (pinelem) {
+      pinelem.addEventListener("click", function () {
+        pinelem.className = "pinned";
+
+      });
+    });
+  };
+
   render() {
     return (
       <div>
         {this.state.askForUsername === true ? (
-          <div style={{display:"flex", marginTop:"25vh"}}>
-            <div className="join"
-            >
-              <p
-                className="text"
-              >
-                Join A Meet
-              </p>
-              <Input className="input"
+          <div style={{ display: "flex", marginTop: "25vh" }}>
+            <div className="join">
+              <p className="text">Join A Meet</p>
+              <Input
+                className="input"
                 placeholder="Enter a Username"
                 value={this.state.username}
                 onChange={(e) => this.handleUsername(e)}
-                style={{color: "#000000" }}
+                style={{ color: "#000000" }}
               />
               <Button
                 variant="contained"
                 onClick={this.connect}
-                style={{ margin: "20px", width:"80%", backgroundColor:"#56CBCC" }}
+                style={{
+                  margin: "20px",
+                  width: "80%",
+                  backgroundColor: "#56CBCC",
+                }}
               >
                 Connect
               </Button>
@@ -501,7 +510,7 @@ class Video extends Component {
 
             <div>
               <video
-              className="my-video"
+                className="my-video"
                 ref={this.localVideoref}
                 autoPlay
                 muted
@@ -510,13 +519,8 @@ class Video extends Component {
           </div>
         ) : (
           <div>
-            <div
-              className="btn-down" 
-            >
-              <IconButton
-                style={{ color: "#fff" }}
-                onClick={this.handleVideo}
-              >
+            <div className="btn-down">
+              <IconButton style={{ color: "#fff" }} onClick={this.handleVideo}>
                 {this.state.video === true ? (
                   <VideocamIcon />
                 ) : (
@@ -531,10 +535,7 @@ class Video extends Component {
                 <CallEndIcon />
               </IconButton>
 
-              <IconButton
-                style={{ color: "#fff" }}
-                onClick={this.handleAudio}
-              >
+              <IconButton style={{ color: "#fff" }} onClick={this.handleAudio}>
                 {this.state.audio === true ? <MicIcon /> : <MicOffIcon />}
               </IconButton>
 
@@ -557,10 +558,7 @@ class Video extends Component {
                 color="secondary"
                 onClick={this.openChat}
               >
-                <IconButton
-                  style={{ color: "#fff" }}
-                  onClick={this.openChat}
-                >
+                <IconButton style={{ color: "#fff" }} onClick={this.openChat}>
                   <ChatIcon />
                 </IconButton>
               </Badge>
@@ -603,7 +601,7 @@ class Video extends Component {
                   variant="contained"
                   color="primary"
                   onClick={this.sendMessage}
-                  style={{ margin: "20px", backgroundColor:"#56CBCC" }}
+                  style={{ margin: "20px", backgroundColor: "#56CBCC" }}
                 >
                   Send
                 </Button>
@@ -612,22 +610,26 @@ class Video extends Component {
 
             <div className="container">
               <div style={{ paddingTop: "20px" }}>
-                <Input value={window.location.href} disable="true" style={{ color: "#fff" }}></Input>
+                <Input
+                  value={window.location.href}
+                  disable="true"
+                  style={{ color: "#fff" }}
+                ></Input>
                 <Button
-                  style={{ margin: "20px", backgroundColor:"#56CBCC" }}
+                  style={{ margin: "20px", backgroundColor: "#56CBCC" }}
                   onClick={this.copyUrl}
                 >
                   Copy invite link
                 </Button>
               </div>
-                <video
-                  className="disp-video"
-                  ref={this.localVideoref}
-                  autoPlay
-                  muted
-                  ></video>
+              <video
+                className="disp-video"
+                ref={this.localVideoref}
+                autoPlay
+                muted
+              ></video>
             </div>
-            <div className="flex-container" id="main"/>
+            <div className="flex-container" id="main" />
           </div>
         )}
       </div>
