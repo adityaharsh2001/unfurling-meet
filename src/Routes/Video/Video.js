@@ -9,6 +9,8 @@ import ScreenShareIcon from "@material-ui/icons/ScreenShare";
 import StopScreenShareIcon from "@material-ui/icons/StopScreenShare";
 import CallEndIcon from "@material-ui/icons/CallEnd";
 import ChatIcon from "@material-ui/icons/Chat";
+import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import StopIcon from "@material-ui/icons/Stop";
 import { message } from "antd";
 import "antd/dist/antd.css";
 import Modal from "react-bootstrap/Modal";
@@ -339,7 +341,7 @@ class Video extends Component {
               searchVideo.srcObject = event.stream;
             } else {
               elms = clients.length;
-              
+
               let main = document.getElementById("main");
               let videoelem = document.createElement("video");
               videoelem.className = "user-video";
@@ -467,8 +469,7 @@ class Video extends Component {
 
   connect = () => {
     this.setState({ askForUsername: false }, () => this.getMedia());
-    
-  }
+  };
 
   pin_video = () => {
     let pinvideo = document.querySelectorAll("video");
@@ -476,8 +477,48 @@ class Video extends Component {
     let pin_arr = Array.from(pinvideo);
     pin_arr.forEach(function (pinelem) {
       pinelem.addEventListener("click", function () {
-          pinelem.classList.toggle('pinned');
+        pinelem.classList.toggle("pinned");
       });
+    });
+  };
+
+  startRecord = () => {
+    const parts = [];
+    let mediaRecorder;
+    if (this.videoAvailable || this.audioAvailable) {
+      navigator.mediaDevices
+        .getUserMedia({
+          video: this.videoAvailable,
+          audio: this.audioAvailable,
+        })
+        .then((stream) => {
+          mediaRecorder = new MediaRecorder(stream);
+          mediaRecorder.start(1000);
+          mediaRecorder.ondataavailable = function (e) {
+            parts.push(e.data);
+            console.log("recording started");
+          };
+
+          document.getElementById("stopRecord").onclick = function () {
+            mediaRecorder.stop();
+
+            const blob = new Blob(parts, {
+              type: "video/webm",
+            });
+            const url = global.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.style = "display: none";
+            a.href = url;
+            a.download = "meetrecording.webm";
+            a.click();
+          };
+        })
+        .then((stream) => {})
+        .catch((e) => console.log(e));
+    }
+    navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
     });
   };
 
@@ -538,7 +579,15 @@ class Video extends Component {
               <IconButton style={{ color: "#fff" }} onClick={this.handleAudio}>
                 {this.state.audio === true ? <MicIcon /> : <MicOffIcon />}
               </IconButton>
-
+              <IconButton
+                style={{ color: "#f44336" }}
+                onClick={this.startRecord}
+              >
+                <FiberManualRecordIcon />
+              </IconButton>
+              <IconButton style={{ color: "#f44336" }} id="stopRecord">
+                <StopIcon />
+              </IconButton>
               {this.state.screenAvailable === true ? (
                 <IconButton
                   style={{ color: "#fff" }}
@@ -551,7 +600,6 @@ class Video extends Component {
                   )}
                 </IconButton>
               ) : null}
-
               <Badge
                 badgeContent={this.state.newmessages}
                 max={999}
