@@ -2,12 +2,12 @@ body {
   text-align: center;
   background-image: url("./image-from-rawpixel-id-516753-jpeg.jpg");
   background-size: cover;
-  height: 100vh;
+  /* height: 100vh; */
   width: 100%;
   background-repeat: no-repeat;
   overflow: hidden;
-  color: black;
 }
+
 video.pinned{
   margin: 0;
   position: absolute;
@@ -38,13 +38,9 @@ video.pinned{
   font-family: sans-serif;
   font-weight: 900;
 }
-Input {
-  margin: 20px;
-  color: #fff !important;
-  border-color: #56cbcc;
-}
+
 .flex-container {
-  max-height: 100vh;
+  max-height: 80vh;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -52,6 +48,7 @@ Input {
   justify-content: space-between;
   margin: 10px 20px auto auto;
 }
+
 
 video {
   margin-top: 10px;

@@ -434,7 +434,6 @@ class Video extends Component {
   };
 
   handleUsername = (e) => this.setState({ username: e.target.value });
-
   sendMessage = () => {
     socket.emit("chat-message", this.state.message, this.state.username);
     this.setState({ message: "", sender: this.state.username });
@@ -531,10 +530,10 @@ class Video extends Component {
               <p className="text">Join A Meet</p>
               <Input
                 className="input"
+                style={{color: "#fff"}}
                 placeholder="Enter a Username"
                 value={this.state.username}
                 onChange={(e) => this.handleUsername(e)}
-                style={{ color: "#000000" }}
               />
               <Button
                 variant="contained"
@@ -659,10 +658,10 @@ class Video extends Component {
             <div className="container">
               <div style={{ paddingTop: "20px" }}>
                 <Input
+                  style={{ color: "#fff" }}
                   value={window.location.href}
                   disable="true"
-                  style={{ color: "#fff" }}
-                ></Input>
+                />
                 <Button
                   style={{ margin: "20px", backgroundColor: "#56CBCC" }}
                   onClick={this.copyUrl}
