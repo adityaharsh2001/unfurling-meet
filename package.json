@@ -36,12 +36,11 @@
     "xss": "^1.0.8"
   },
   "scripts": {
-    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon app.js\" \"NODE_ENV=dev PORT=5000 react-scripts start\"",
+    "dev": "concurrently -n 'server,client' -c 'red,green'  \"nodemon index.js\" \"NODE_ENV=dev PORT=5000 react-scripts start\"",
     "server": "NODE_ENV=production nodemon index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "PORT=5000 react-scripts start"
   },
   "eslintConfig": {
     "extends": "react-app"
