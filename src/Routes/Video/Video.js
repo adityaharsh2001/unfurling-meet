@@ -17,7 +17,7 @@ import Modal from "react-bootstrap/Modal";
 import "bootstrap/dist/css/bootstrap.css";
 import "../../App.css";
 
-const server_url = "http://localhost:4001";
+const server_url = "https://unfurling-meet.herokuapp.com/";
 
 var connections = {};
 const peerConnectionConfig = {
