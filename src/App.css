@@ -1,11 +1,8 @@
 body {
   text-align: center;
-  background-image: url("./image-from-rawpixel-id-516753-jpeg.jpg");
-  background-size: cover;
-  /* height: 100vh; */
   width: 100%;
-  background-repeat: no-repeat;
   overflow: hidden;
+  background-color: #292F36;
 }
 
 video.pinned{

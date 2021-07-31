@@ -547,7 +547,6 @@ class Video extends Component {
                 Connect
               </Button>
             </div>
-
             <div>
               <video
                 className="my-video"
