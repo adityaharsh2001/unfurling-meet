@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Start from '../../Componets/Start'
+import Start from '../../Components/Start'
 export class Home extends Component {
   render() {
     return (
