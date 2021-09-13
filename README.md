@@ -6,9 +6,14 @@ This is a Multi-Clientcalling application where users can call other user and wi
 
 **Demo** - ***https://unfurling-meet.herokuapp.com/***
 
+# Run the Devlopment Server 
+  - git clone 
+
+
 # Features and Functionalities 😃
-
-
+ - https://github.com/adityaharsh2001/
+ - yarn 
+ - yarn run dev
 
 ## What's Working
 
