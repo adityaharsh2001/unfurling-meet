@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Video from './Routes/Video/Video'
 import Home from './Routes/Home/Home'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import Particle from './Components/Particle.jss';
+import Particle from './Components/Particle.js';
 import "./App.css"
 class App extends Component {
 	render() {

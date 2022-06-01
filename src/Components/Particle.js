@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Particles from 'react-particles-js';
+import Particles from 'react-tsparticles';
 export class Particle extends Component {
     render() {
         return (
